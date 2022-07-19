@@ -32,7 +32,6 @@ function App() {
         ));
         setData(listItems);
       } catch (error) {
-        console.log("error", error);
       }
     };
 
@@ -45,7 +44,6 @@ function App() {
   );
 
   function setCheckbox(e, key) {
-    console.log(e.target.checked);
     if (e.target.checked === true) {
       localStorage.setItem(key, true);
     } else {
@@ -57,7 +55,6 @@ function App() {
     const checkboxStat = window.localStorage.getItem(key);
 
     if (checkboxStat === "true") {
-      console.log(Boolean(checkboxStat), key);
       return true;
     } else {
       return false;
