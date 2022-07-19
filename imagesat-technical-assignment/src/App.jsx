@@ -10,7 +10,6 @@ function App() {
       try {
         const response = await fetch(url);
         const json = await response.json();
-        // console.log(json);
         const listItems = json.records.map((records, key) => (
           <div key={key}>
             <input
