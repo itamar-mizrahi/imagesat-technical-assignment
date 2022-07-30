@@ -11,37 +11,42 @@ function App() {
         const response = await fetch(url);
         const json = await response.json();
         const listItems = json.records.map((records, key) => (
-          <div key={key}>
-            <ul>
-            <input
-              type="checkbox"
-              defaultChecked={isChecked(key)}
-              onChange={(e) => setCheckbox(e, key)}
-              key={key + "name"}
-            ></input>
-            <label>
-              {" "}
-              {key} : {records.ship.name}
-            </label>
-            <li key={key + "callsign"}>{records.ship.callsign}</li>
-            <li key={key + "country"}>{records.ship.country}</li>
-            <li key={key + "width"}>{records.ship.width}</li>
-            {/* <li key={key + "space"} style={{ listStyle: "none" }}>
+          <tr key={key}>
+              <input
+                type="checkbox"
+                defaultChecked={isChecked(key)}
+                onChange={(e) => setCheckbox(e, key)}
+                key={key + "name"}
+              ></input>
+              <label>
+                {" "}
+                {key} : {records.ship.name}
+              </label>
+              <td key={key + "callsign"}>{records.ship.callsign}</td>
+              <td key={key + "country"}>{records.ship.country}</td>
+              <td key={key + "width"}>{records.ship.width}</td>
+              {/* <li key={key + "space"} style={{ listStyle: "none" }}>
               ________
             </li> */}
-            </ul>
-          </div>
+          </tr>
         ));
         setData(listItems);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchData();
   }, []);
   return (
     <div className="list App-header">
-      <ul>{data}</ul>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Country</th>
+          <th>Contact</th>
+        </tr>
+        {data}
+      </table>
     </div>
   );
 
