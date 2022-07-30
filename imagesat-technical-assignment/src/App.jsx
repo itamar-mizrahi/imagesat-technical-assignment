@@ -11,22 +11,22 @@ function App() {
       try {
         const response = await fetch(url);
         const json = await response.json();
+        console.log(json);
         const listItems = json.records.map((records, key) => (
           <tr key={key}>
-              <td>
+            <td>
               <input
                 type="checkbox"
                 defaultChecked={isChecked(key)}
-                onChange={(e) => setCheckbox(e, key)}
+                onChange={(e) => setCheckbox(e, key,records.ship)}
                 key={key + "name"}
-              ></input>
-                {" "}
-                {key} : {records.ship.name}
-              </td>
-
-              <td key={key + "callsign"}>{records.ship.callsign}</td>
-              <td key={key + "country"}>{records.ship.country}</td>
-              <td key={key + "width"}>{records.ship.width}</td>
+              ></input>{" "}
+              {key + 1} : {records.ship.name}
+            </td>
+            {records.ship.details}
+            <td key={key + "callsign"}>{records.ship.callsign}</td>
+            <td key={key + "country"}>{records.ship.country}</td>
+            <td key={key + "width"}>{records.ship.width}</td>
           </tr>
         ));
         setData(listItems);
@@ -37,7 +37,7 @@ function App() {
   }, []);
   return (
     <div className="list App-header">
-      <table >
+      <table>
         <tr>
           <th>Name</th>
           <th>Company</th>
@@ -46,18 +46,19 @@ function App() {
         </tr>
         {data}
       </table>
-      <div className="selected-item">
-      {selectedItem}
-      </div>
+      <div className="selected-item">{selectedItem}</div>
     </div>
   );
 
-  function setCheckbox(e, key) {
+  function setCheckbox(e, key, shipDetails) {
     if (e.target.checked === true) {
       localStorage.setItem(key, true);
     } else {
       localStorage.setItem(key, false);
     }
+console.log(e);
+    setSelectedItem((e)=>{console.log(shipDetails);
+      return Object.entries(shipDetails).map((row)=><div>{row[0]+' : '+row[1]}</div>)})
   }
 
   function isChecked(key) {

@@ -54,7 +54,7 @@ table {
   display:inline-block;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  min-width: 60%;
 }
 
 td{
@@ -64,7 +64,6 @@ td{
 }
 
  th {
-  /* border: 1px solid #dddddd; */
   text-align: center;
   padding: 50px;
   position: sticky;
@@ -83,6 +82,9 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: white;
-  width:60%;
+  min-width: 40%;
+
+  
 }
