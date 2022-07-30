@@ -12,6 +12,7 @@ function App() {
         const json = await response.json();
         const listItems = json.records.map((records, key) => (
           <div key={key}>
+            <ul>
             <input
               type="checkbox"
               defaultChecked={isChecked(key)}
@@ -25,9 +26,10 @@ function App() {
             <li key={key + "callsign"}>{records.ship.callsign}</li>
             <li key={key + "country"}>{records.ship.country}</li>
             <li key={key + "width"}>{records.ship.width}</li>
-            <li key={key + "space"} style={{ listStyle: "none" }}>
+            {/* <li key={key + "space"} style={{ listStyle: "none" }}>
               ________
-            </li>
+            </li> */}
+            </ul>
           </div>
         ));
         setData(listItems);
