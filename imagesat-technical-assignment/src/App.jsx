@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [data, setData] = useState("Loading...");
+  const [selectedItem, setSelectedItem] = useState("nothing selected");
   useEffect(() => {
     const url = "https://run.mocky.io/v3/e521013e-bfb8-45aa-8406-a1d37cbbd717";
 
@@ -12,16 +13,17 @@ function App() {
         const json = await response.json();
         const listItems = json.records.map((records, key) => (
           <tr key={key}>
+              <td>
               <input
                 type="checkbox"
                 defaultChecked={isChecked(key)}
                 onChange={(e) => setCheckbox(e, key)}
                 key={key + "name"}
               ></input>
-              <label>
                 {" "}
                 {key} : {records.ship.name}
-              </label>
+              </td>
+
               <td key={key + "callsign"}>{records.ship.callsign}</td>
               <td key={key + "country"}>{records.ship.country}</td>
               <td key={key + "width"}>{records.ship.width}</td>
@@ -38,7 +40,7 @@ function App() {
   }, []);
   return (
     <div className="list App-header">
-      <table>
+      <table >
         <tr>
           <th>Name</th>
           <th>Company</th>
@@ -47,6 +49,9 @@ function App() {
         </tr>
         {data}
       </table>
+      <div className="selected-item">
+      {selectedItem}
+      </div>
     </div>
   );
 
