@@ -27,9 +27,6 @@ function App() {
               <td key={key + "callsign"}>{records.ship.callsign}</td>
               <td key={key + "country"}>{records.ship.country}</td>
               <td key={key + "width"}>{records.ship.width}</td>
-              {/* <li key={key + "space"} style={{ listStyle: "none" }}>
-              ________
-            </li> */}
           </tr>
         ));
         setData(listItems);
