@@ -1,9 +1,7 @@
 import "./App.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const myContainer = useRef(null);
-  // const [value, setValue] = useState('black');
   const [data, setData] = useState("Loading...");
   const [selectedItem, setSelectedItem] = useState("nothing selected");
   useEffect(() => {
@@ -14,18 +12,19 @@ function App() {
         const response = await fetch(url);
         const json = await response.json();
         const listItems = json.records.map((records, key) => (
-          <tr key={key} style={{backgroundColor:isChecked(key)?'black':''}}
-          // style={{background: value}}
+          <tr
+            key={key}
+            style={{ backgroundColor: isChecked(key) ? "black" : "" }}
           >
             <td>
               <input
                 type="checkbox"
                 defaultChecked={isChecked(key)}
-                // onClick={() => {setValue('salmon'); console.log(value);}}
                 onChange={(e) => {
-                  setCheckbox(e, key,records.ship)}}
+                  setCheckbox(e, key, records.ship);
+                }}
                 key={key + "name"}
-              ></input> {" "}
+              ></input>{" "}
               {key + 1} : {records.ship.name}
             </td>
             {records.ship.details}
@@ -42,7 +41,6 @@ function App() {
   }, []);
   return (
     <div className="list App-header">
-      {/* {value} */}
       <table>
         <tr>
           <th>Name</th>
@@ -59,24 +57,25 @@ function App() {
   function setCheckbox(e, key, shipDetails) {
     if (e.target.checked === true) {
       localStorage.setItem(key, true);
-      console.log(e.currentTarget.parentElement);
-      e.currentTarget.parentElement.parentElement.style.backgroundColor='blue';
+      e.currentTarget.parentElement.parentElement.style.backgroundColor =
+        "blue";
     } else {
       localStorage.setItem(key, false);
-      e.currentTarget.parentElement.parentElement.style.backgroundColor='';
+      e.currentTarget.parentElement.parentElement.style.backgroundColor = "";
     }
-    setSelectedItem(()=>{
-      return Object.entries(shipDetails).map((row, key)=><div key={key}>{row[0]+' : '+row[1]}</div>)})
+    setSelectedItem(() => {
+      return Object.entries(shipDetails).map((row, key) => (
+        <div key={key}>{row[0] + " : " + row[1]}</div>
+      ));
+    });
   }
 
   function isChecked(key) {
     const checkboxStat = window.localStorage.getItem(key);
 
     if (checkboxStat === "true") {
-      //  e.currentTarget.parentElement.parentElement.style.backgroundColor='blue';
       return true;
     } else {
-      
       return false;
     }
   }
