@@ -40,7 +40,7 @@ function App() {
     fetchData();
   }, []);
   return (
-    <div className="list App-header">
+    <div className="App-header">
       <table>
         <tr>
           <th>Name</th>
